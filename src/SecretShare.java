@@ -3,8 +3,9 @@ import java.util.Random;
 
 /**
  * Created by sethr on 9/12/2016.
- */
-public class Shares {
+ **/
+public class SecretShare {
+
     private final BigInteger PRIME;
     // bit-length of 10 for the prime is sufficient, since the secret cannot be greater than 2^8.
     private final int PRIME_LENGTH = 10;
@@ -15,7 +16,7 @@ public class Shares {
 
     // TODO(srait): Add error checking for numshares < threshold || numshares  > secret
     // TODO(srait): Shares need to be BigIntegers to avoid integer overflow
-    public Shares(byte secret, int threshold, int numshares) {
+    public SecretShare(byte secret, int threshold, int numshares) {
         this.secret = secret;
         this.threshold = threshold;
         this.numshares = numshares;
@@ -37,24 +38,25 @@ public class Shares {
         return coefficients;
     }
 
-    public BigInteger getPRIME() {
+    public BigInteger getPrime() {
         return PRIME;
     }
 
-    // Returns tuples of the form (x, f(x) % p).
+    // Returns array of tuples of the form (x, f(x) % p).
     // In order to reconstruct the polynomial using LaGrange Interpolation, all x coordinates
-    // need to be coprime to PRIME so the mod-inverse can be calculated.
-    public int[][] CreateShares() {
-        int shares[][] = new int[numshares][2];
-        int xCoord, yCoord;
+    // need to be co-prime to PRIME so the mod-inverse can be calculated.
+    public Share[] CreateShares() {
+        Share shares[] = new Share[numshares];
+        int xCoord;
+        BigInteger yCoord;
         for (xCoord = 1; xCoord <= numshares; xCoord++) {
-            yCoord = 0;
+            yCoord = BigInteger.ZERO;
             for (int index = 1; index < coefficients.length; index++) {
-                yCoord += coefficients[index] * Math.pow(xCoord, index);
+                yCoord = yCoord.add(BigInteger.valueOf(coefficients[index] * (long)Math.pow(xCoord, index)));
             }
-            yCoord += coefficients[0];
-            shares[xCoord - 1][0] = xCoord;
-            shares[xCoord - 1][1] = yCoord;
+            yCoord = yCoord.add(BigInteger.valueOf(coefficients[0]));
+            shares[xCoord - 1] = new Share(xCoord, yCoord);
+            //shares[xCoord - 1][1] = yCoord;
         }
         return shares;
     }

@@ -5,24 +5,33 @@ import java.math.BigInteger;
  */
     // Represents individual shares as a tuple (x, y)
 public class Share {
-    private int xVal;
+    private BigInteger xVal;
     private BigInteger yVal;
 
     public Share(int xVal, int yVal) {
-        this.xVal = xVal;
+        this.xVal = BigInteger.valueOf(xVal);
         this.yVal = BigInteger.valueOf(yVal);
     }
 
-    public Share(int xVal, BigInteger yVal) {
+    public Share(BigInteger xVal, BigInteger yVal) {
         this.xVal = xVal;
         this.yVal = yVal;
     }
 
-    public int getx() {
+    public Share(int xVal, BigInteger yVal) {
+        this.xVal = BigInteger.valueOf(xVal);
+        this.yVal = yVal;
+    }
+
+    public BigInteger getx() {
         return xVal;
     }
 
     public BigInteger gety() {
         return yVal;
+    }
+
+    public String toString() {
+        return("(" + xVal.toString() + ", " + yVal.toString() + ")");
     }
 }
