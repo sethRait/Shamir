@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 
 /**
@@ -8,6 +10,7 @@ public class Tests {
         byte secret = 8;
         Shares shamir = new Shares(secret, 3, 4);
         shamir.CreatePolynomial();
+        BigInteger prime = shamir.getPRIME();
         int[] coef = shamir.getCoefficients();
         int[][] shares = shamir.CreateShares();
         System.out.print("f(x) = " + coef[0]);
@@ -18,6 +21,8 @@ public class Tests {
         for(int i = 0; i < shares.length; i++) {
             System.out.println(Arrays.toString(shares[i]));
         }
+        int[][] reconShares = {shares[0], shares[1], shares[2]};
+        System.out.println(SecretFind.combine(reconShares, prime));
 
     }
 

@@ -40,18 +40,20 @@ public class Shares {
         return PRIME;
     }
 
-    // Returns tuples of the form (x, f(x) % p)
+    // Returns tuples of the form (x, f(x) % p).
+    // In order to reconstruct the polynomial using LaGrange Interpolation, all x coordinates
+    // need to be coprime to PRIME so the mod-inverse can be calculated.
     public int[][] CreateShares() {
         int shares[][] = new int[numshares][2];
         int xCoord, yCoord;
-        for (xCoord = 0; xCoord < numshares; xCoord++) {
+        for (xCoord = 1; xCoord <= numshares; xCoord++) {
             yCoord = 0;
             for (int index = 1; index < coefficients.length; index++) {
                 yCoord += coefficients[index] * Math.pow(xCoord, index);
             }
             yCoord += coefficients[0];
-            shares[xCoord][0] = xCoord;
-            shares[xCoord][1] = yCoord;
+            shares[xCoord - 1][0] = xCoord;
+            shares[xCoord - 1][1] = yCoord;
         }
         return shares;
     }
