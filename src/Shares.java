@@ -14,6 +14,7 @@ public class Shares {
     private int[] coefficients;
 
     // TODO(srait): Add error checking for numshares < threshold || numshares  > secret
+    // TODO(srait): Shares need to be BigIntegers to avoid integer overflow
     public Shares(byte secret, int threshold, int numshares) {
         this.secret = secret;
         this.threshold = threshold;
