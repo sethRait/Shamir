@@ -6,13 +6,13 @@ import java.util.Arrays;
 public class Tests {
     public static void main(String[] args) {
         byte secret = 8;
-        Shamir shamir = new Shamir(secret, 4, 3);
+        Shares shamir = new Shares(secret, 3, 4);
         shamir.CreatePolynomial();
         int[] coef = shamir.getCoefficients();
         int[][] shares = shamir.CreateShares();
-        System.out.print("f(x) = " + coef[0] + "x^3");
+        System.out.print("f(x) = " + coef[0]);
         for(int i = 1; i < coef.length; i++) {
-            System.out.print(" + " + coef[i] + "x^" + (coef.length - i));
+            System.out.print(" + " + coef[i] + "x^" + i);
         }
         System.out.println();
         for(int i = 0; i < shares.length; i++) {
