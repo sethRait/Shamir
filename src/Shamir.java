@@ -31,20 +31,22 @@ public class Shamir {
         }
     }
 
+    public int[] getCoefficients() {
+        return coefficients;
+    }
+
     // Returns tuples of the form (x, f(x) % p)
     public int[][] CreateShares() {
         int shares[][] = new int[numshares][2];
         int xCoord, yCoord;
-        for (xCoord = 0; xCoord <= numshares; xCoord++) {
+        for (xCoord = 0; xCoord < numshares; xCoord++) {
             yCoord = 0;
             for (int index = 0; index < coefficients.length; index++) {
                 yCoord += coefficients[index] * Math.pow(xCoord, (coefficients.length - index));
             }
-            yCoord %= PRIME.intValue();
             shares[xCoord][0] = xCoord;
             shares[xCoord][1] = yCoord;
         }
         return shares;
-
     }
 }
