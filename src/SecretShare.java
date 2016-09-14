@@ -15,7 +15,6 @@ public class SecretShare {
     private int[] coefficients;
 
     // TODO(srait): Add error checking for numshares < threshold || numshares  > secret
-    // TODO(srait): Shares need to be BigIntegers to avoid integer overflow
     public SecretShare(byte secret, int threshold, int numshares) {
         this.secret = secret;
         this.threshold = threshold;
@@ -52,7 +51,7 @@ public class SecretShare {
         for (xCoord = 1; xCoord <= numshares; xCoord++) {
             yCoord = BigInteger.ZERO;
             for (int index = 1; index < coefficients.length; index++) {
-                yCoord = yCoord.add(BigInteger.valueOf(coefficients[index] * (long)Math.pow(xCoord, index)));
+                yCoord = yCoord.add((BigInteger.valueOf(coefficients[index]).multiply((BigInteger.valueOf(xCoord).pow(index)))));
             }
             yCoord = yCoord.add(BigInteger.valueOf(coefficients[0]));
             shares[xCoord - 1] = new Share(xCoord, yCoord);

@@ -8,9 +8,9 @@ import java.util.Arrays;
 // TODO(srait): Use JUnit or Google for tests
 public class Tests {
     public static void main(String[] args) {
-        byte secret = 87;
-        int threshold = 3;
-        SecretShare shamir = new SecretShare(secret, threshold, 5);
+        byte secret = 23;
+        int threshold = 90;
+        SecretShare shamir = new SecretShare(secret, threshold, 100);
         shamir.CreatePolynomial();
         BigInteger prime = shamir.getPrime();
         int[] coef = shamir.getCoefficients();
