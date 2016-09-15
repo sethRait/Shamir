@@ -27,8 +27,8 @@ public class SecretShare {
         coefficients = new int[threshold];
         Random random = new Random();
         for (int i = 1; i < coefficients.length; i++) {
-            // Creates a uniformly distributed number [1, PRIME)
-            coefficients[i] = random.nextInt(PRIME.intValue());
+            // Creates uniformly distributed coefficients [1, PRIME)
+            coefficients[i] = (1 + random.nextInt(PRIME.intValue() - 1));
         }
         coefficients[0] = secret;
     }
@@ -54,8 +54,7 @@ public class SecretShare {
                 yCoord = yCoord.add((BigInteger.valueOf(coefficients[index]).multiply((BigInteger.valueOf(xCoord).pow(index)))));
             }
             yCoord = yCoord.add(BigInteger.valueOf(coefficients[0]));
-            shares[xCoord - 1] = new Share(xCoord, yCoord);
-            //shares[xCoord - 1][1] = yCoord;
+            shares[xCoord - 1] = new Share(xCoord, yCoord.mod(PRIME));
         }
         return shares;
     }
