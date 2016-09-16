@@ -20,10 +20,11 @@ public class SecretShare {
         this.threshold = threshold;
         this.numshares = numshares;
         PRIME = BigInteger.probablePrime(PRIME_LENGTH, new Random());
+        CreatePolynomial();
     }
 
     // Returns an array of coefficients where the highest order coefficient is last.
-    public void CreatePolynomial() {
+    protected void CreatePolynomial() {
         coefficients = new int[threshold];
         Random random = new Random();
         for (int i = 1; i < coefficients.length; i++) {
