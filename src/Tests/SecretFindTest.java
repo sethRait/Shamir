@@ -2,8 +2,6 @@ import org.junit.Test;
 
 import java.math.BigInteger;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by sethr on 9/15/2016.
  */

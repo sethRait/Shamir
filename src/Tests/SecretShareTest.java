@@ -15,7 +15,7 @@ public class SecretShareTest {
     private int numShares;
     private int[] coefficients;
     private BigInteger prime;
-    SecretShare sharer;
+    private SecretShare sharer;
 
     @Before
     public void setUp() throws Exception {
