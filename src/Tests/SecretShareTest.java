@@ -15,14 +15,14 @@ public class SecretShareTest {
     private int numShares;
     private int[] coefficients;
     private BigInteger prime;
-    private SecretShare sharer;
+    private ByteShare sharer;
 
     @Before
     public void setUp() throws Exception {
         secret = 42;
         threshold = 27;
         numShares = 1700;
-        sharer = new SecretShare(secret, threshold, numShares);
+        sharer = new ByteShare(secret, threshold, numShares);
         prime = sharer.getPrime();
     }
 

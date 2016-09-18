@@ -13,6 +13,12 @@ public class Share {
         this.yVal = BigInteger.valueOf(yVal);
     }
 
+    public Share(String xVal, String yVal) {
+        this.xVal = new BigInteger(xVal);
+        this.yVal = new BigInteger(yVal);
+
+    }
+
     public Share(BigInteger xVal, BigInteger yVal) {
         this.xVal = xVal;
         this.yVal = yVal;

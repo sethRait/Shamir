@@ -4,7 +4,7 @@ import java.math.BigInteger;
  * Created by sethr on 9/12/2016.
  */
 public class SecretFind {
-    public static int combine(Share[] shares, BigInteger prime) {
+    public static byte combine(Share[] shares, BigInteger prime) {
         BigInteger secret;
         BigInteger finalSecret = BigInteger.ZERO;
         BigInteger temp;
@@ -20,6 +20,6 @@ public class SecretFind {
             finalSecret = finalSecret.add(secret);
         }
         finalSecret = finalSecret.mod(prime);
-        return finalSecret.intValue();
+        return finalSecret.byteValueExact();
     }
 }

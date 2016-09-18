@@ -12,7 +12,7 @@ public class SecretFindTest {
         byte secret = 42;
         int threshold = 9;
         int numShares = 35;
-        SecretShare sharer = new SecretShare(secret, threshold, numShares);
+        ByteShare sharer = new ByteShare(secret, threshold, numShares);
         BigInteger prime = sharer.getPrime();
         assert (SecretFind.combine(sharer.CreateShares(), prime) == (int)secret);
     }
