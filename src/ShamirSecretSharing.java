@@ -1,8 +1,6 @@
-import java.util.Arrays;
-
 public class ShamirSecretSharing {
     public static void main(String[] args) {
-        InputHandler handler = new InputHandler(new String[]{"create", "C:\\Users\\sethr\\IdeaProjects\\Shamir\\src\\Tests\\TestSecret.txt", "3", "4"});
+        InputHandler handler = new InputHandler(new String[]{"share", "C:\\Users\\sethr\\IdeaProjects\\Shamir\\src\\Tests\\TestSecret.txt", "3", "4"});
         handler.driver();
         Point[] shares = handler.getShares();
         int prime = handler.prime;

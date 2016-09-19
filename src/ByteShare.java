@@ -10,17 +10,17 @@ public class ByteShare {
     // bit-length of 8 for the prime is sufficient, since the secret cannot be greater than 2^8.
     private final int PRIME_LENGTH = 10;
     private int threshold;
-    private int numshares;
+    private int numShares;
     private byte secret;
     private int[] coefficients;
 
-    public ByteShare(byte secret, int threshold, int numshares) {
-        if(numshares < threshold) {
+    public ByteShare(byte secret, int threshold, int numShares) {
+        if (numShares < threshold) {
             throw new IllegalArgumentException("Threshold cannot be larger than the total number of shares.");
         }
         this.secret = secret;
         this.threshold = threshold;
-        this.numshares = numshares;
+        this.numShares = numShares;
         //PRIME = BigInteger.probablePrime(PRIME_LENGTH, new Random());
         CreatePolynomial();
     }
@@ -63,6 +63,6 @@ public class ByteShare {
     }
 
     public Share[] CreateShares() {
-        return CreateShares(0, numshares);
+        return CreateShares(0, numShares);
     }
 }

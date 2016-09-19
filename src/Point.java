@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Created by sethr on 9/16/2016.
  */
@@ -16,6 +14,14 @@ public class Point {
         this.y = y;
     }
 
+    public static Share[] toShare(Point[] points) {
+        Share[] shares = new Share[points.length];
+        for (int i = 0; i < points.length; i++) {
+            shares[i] = new Share(points[i].getX(), points[i].getY());
+        }
+        return shares;
+    }
+
     public String getX() {
         return x;
     }
@@ -28,16 +34,7 @@ public class Point {
         return x + " " + y;
     }
 
-    public static Share[] toShare(Point[] points) {
-        Share[] shares = new Share[points.length];
-        for (int i = 0; i < points.length; i++) {
-            shares[i] = new Share(points[i].getX(), points[i].getY());
-        }
-        return shares;
-    }
-
     public String prettyPrint() {
         return "(" + x + ", " + y + ")";
     }
-
 }

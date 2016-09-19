@@ -8,17 +8,17 @@ import java.util.*;
  * Created by sethr on 9/18/2016.
  */
 public class InputHandler {
+    public int prime;
     private List<String> arguments;
     private Map<String, Runnable> func;
     private Scanner console;
     private Point[] shares;
-    public int prime;
 
     public InputHandler(String[] arguments) {
         this.arguments = new ArrayList<>(Arrays.asList(arguments));
         func = new HashMap<>();
         func.put("help", this::help);
-        func.put("create", this::createWrapper);
+        func.put("share", this::shareWrapper);
         func.put("combine", this::combine);
         console = new Scanner(System.in);
     }
@@ -46,25 +46,20 @@ public class InputHandler {
         }
         try {
             secret = new String(bytes, "US-ASCII");
-            System.out.println(secret);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
     private List<Point[]> createPoints(List<List<Integer>> shareList) {
-        List<Point[]> points = new LinkedList<>();//[shareList.get(0).size()];
-        Point[] row = new Point[shareList.size()];
-        int j;
-        int pointCount = 0;
-        for (int i = 1; i < shareList.get(0).size() - 1; i++) {
-            j = 0;
-            for (; j < shareList.size(); j++) {
-                Point p = new Point(shareList.get(j).get(0) + "", shareList.get(j).get(i) + "");
-                row[j] = p;
+        List<Point[]> points = new LinkedList<>();
+        Point[] row;
+        for (int i = 1; i < shareList.get(0).size(); i++) {
+            row = new Point[shareList.size()];
+            for (int j = 0; j < shareList.size(); j++) {
+                row[j] = new Point(shareList.get(j).get(0) + "", shareList.get(j).get(i) + "");
             }
             points.add(row);
-            pointCount++;
         }
         return points;
     }
@@ -83,16 +78,16 @@ public class InputHandler {
         }
     }
 
-    private void createWrapper() {
+    private void shareWrapper() {
         try {
-            create();
+            share();
         }
         catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
-    private void create() throws UnsupportedEncodingException {
+    private void share() throws UnsupportedEncodingException {
         String secret = readToString(arguments.get(1));
         if (secret == null) {
             func.get("help");
@@ -123,6 +118,7 @@ public class InputHandler {
             return null;
         }
     }
+
     public void driver() {
         Runnable cmd;
         String commandPrefix;
@@ -139,10 +135,11 @@ public class InputHandler {
             }
         }
     }
+
     private void help() {
         System.out.println("The following commands are available:\n" +
-                "help --show this menu\n" +
-                "create <path to file containing secret> <threshold> <number of shares> " +
+                "help -- show this menu\n" +
+                "share <path to file containing secret> <threshold> <number of shares> " +
                 "-- create new shares from a secret\n" +
                 "combine <prime> <path to file containing shares>  -- combine shares into a secret");
     }
