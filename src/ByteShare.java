@@ -21,7 +21,6 @@ public class ByteShare {
         this.secret = secret;
         this.threshold = threshold;
         this.numShares = numShares;
-        //PRIME = BigInteger.probablePrime(PRIME_LENGTH, new Random());
         CreatePolynomial();
     }
 

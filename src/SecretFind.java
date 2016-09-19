@@ -1,6 +1,8 @@
 import java.math.BigInteger;
 
 /**
+ * Algorithm based off of LaGrange Polynomial Interpolation.  This does not use the LaGrange formula verbatim.
+ * Instead of calculating the polynomial and finding its y-intercept, this finds only the y-intercept.
  * Created by sethr on 9/12/2016.
  */
 public class SecretFind {

@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
+ * Main driver for interacting with the StringShare and SecretFind classes.
  * Created by sethr on 9/18/2016.
  */
 public class InputHandler {
@@ -13,6 +14,7 @@ public class InputHandler {
     private Map<String, Runnable> func;
     private Scanner console;
     private Point[] shares;
+    private String secret;
 
     public InputHandler(String[] arguments) {
         this.arguments = new ArrayList<>(Arrays.asList(arguments));
@@ -23,6 +25,7 @@ public class InputHandler {
         console = new Scanner(System.in);
     }
 
+    // Takes a list of list of shares to reconstructs the secret.
     private void combine() {
         List<List<Integer>> shareList = new ArrayList<>();
         int prime;
@@ -39,18 +42,24 @@ public class InputHandler {
         }
         getListOfShares(console, shareList);
         List<Point[]> points = createPoints(shareList);
-        String secret;
         byte[] bytes = new byte[points.size()];
         for (int i = 0; i < points.size(); i++) {
             bytes[i] = SecretFind.combine(Point.toShare(points.get(i)), BigInteger.valueOf(prime));
         }
         try {
-            secret = new String(bytes, "US-ASCII");
+            this.secret = new String(bytes, "US-ASCII");
+            System.out.println(secret);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
+    // Returns a reconstructed secret after 'combine' has been called.
+    public String getSecret() {
+        return secret;
+    }
+
+    // Helper method which constructs points out of a list representation of the points values.
     private List<Point[]> createPoints(List<List<Integer>> shareList) {
         List<Point[]> points = new LinkedList<>();
         Point[] row;
@@ -64,6 +73,7 @@ public class InputHandler {
         return points;
     }
 
+    // Helper method which marshals the text from the file into a list
     private void getListOfShares(Scanner console, List<List<Integer>> shareList){
         Scanner lineScan;
         List<Integer> row;
@@ -78,6 +88,7 @@ public class InputHandler {
         }
     }
 
+    // Abstraction of 'share'
     private void shareWrapper() {
         try {
             share();
@@ -87,6 +98,7 @@ public class InputHandler {
         }
     }
 
+    // Takes a secret and creates Shares, printing them to stdout
     private void share() throws UnsupportedEncodingException {
         String secret = readToString(arguments.get(1));
         if (secret == null) {
@@ -105,8 +117,12 @@ public class InputHandler {
         StringShare stringShare = new StringShare(secret, threshold, numShares);
         this.prime = stringShare.getPrime();
         shares = stringShare.getShares();
+        for (Point p : shares) {
+            System.out.println(p);
+        }
     }
 
+    // Helper function which reads the input file containing a secret into a single string
     private String readToString(String path) {
         String fileContents;
         try {
@@ -119,6 +135,7 @@ public class InputHandler {
         }
     }
 
+    // Entry point of the program
     public void driver() {
         Runnable cmd;
         String commandPrefix;
