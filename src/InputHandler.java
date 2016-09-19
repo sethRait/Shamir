@@ -30,8 +30,8 @@ public class InputHandler {
         List<List<Integer>> shareList = new ArrayList<>();
         int prime;
         try {
-            prime = Integer.parseInt(arguments.get(1));
-            console = new Scanner(new File(arguments.get(2)));
+            prime = Integer.parseInt(arguments.get(2));
+            console = new Scanner(new File(arguments.get(1)));
         } catch (NumberFormatException e) {
             System.out.println("Error.  Invalid syntax for 'combine'");
             func.get("help");
@@ -158,7 +158,7 @@ public class InputHandler {
                 "help -- show this menu\n" +
                 "share <path to file containing secret> <threshold> <number of shares> " +
                 "-- create new shares from a secret\n" +
-                "combine <prime> <path to file containing shares>  -- combine shares into a secret");
+                "combine <path to file containing shares> <prime> -- combine shares into a secret");
     }
 
     public Point[] getShares() {
