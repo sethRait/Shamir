@@ -120,6 +120,7 @@ public class InputHandler {
         for (Point p : shares) {
             System.out.println(p);
         }
+        System.out.println("Prime: " + prime);
     }
 
     // Helper function which reads the input file containing a secret into a single string

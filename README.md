@@ -1,5 +1,6 @@
 # Shamir
 Java program for Shamir's Secret Sharing Scheme.  This scheme takes a secret and breaks it into t shares, n of which are needed in order to reconstruct the shares.
+This implementation uses GF(p) for the polynomial.
 ## Usage
 No jar yet, so for the meantime:
 
