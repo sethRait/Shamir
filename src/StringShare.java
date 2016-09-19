@@ -1,8 +1,4 @@
-import sun.misc.BASE64Encoder;
-
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.util.Base64;
 
 /**
  * Created by sethr on 9/16/2016.
