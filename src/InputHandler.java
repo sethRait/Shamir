@@ -34,7 +34,7 @@ public class InputHandler {
             console = new Scanner(new File(arguments.get(1)));
         } catch (NumberFormatException e) {
             System.out.println("Error.  Invalid syntax for 'combine'");
-            func.get("help");
+            func.get("help").run();
             return;
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
@@ -102,7 +102,7 @@ public class InputHandler {
     private void share() throws UnsupportedEncodingException {
         String secret = readToString(arguments.get(1));
         if (secret == null) {
-            func.get("help");
+            func.get("help").run();
         }
         int threshold, numShares;
         try {
@@ -111,7 +111,7 @@ public class InputHandler {
         }
         catch (NumberFormatException e) {
             System.out.println("Error.  Invalid syntax for 'create'");
-            func.get("help");
+            func.get("help").run();
             return;
         }
         StringShare stringShare = new StringShare(secret, threshold, numShares);
