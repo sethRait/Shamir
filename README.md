@@ -3,6 +3,6 @@ Java program for Shamir's Secret Sharing Scheme.  This scheme takes a secret and
 This implementation uses GF(p) for the polynomial.
 ## Usage
 
-java -jar Shamir.jar share <path to file containing secret> <number of shares> <threshold>
+java -jar Shamir.jar share \<path to file containing secret\> \<number of shares\> \<threshold\>
 
-java -jar Shamir.jar combine <path to file containing shares> <prime>
+java -jar Shamir.jar combine \<path to file containing shares\> \<prime\>
